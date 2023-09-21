@@ -36,19 +36,19 @@ module "ec2_docker" {
   source     = "./modules/ec2_docker"
   vpc_id     = module.new-vpc.vpc_id
   subnet_ids = module.new-vpc.subnet_ids
-  key_name   = module.ssh-key.key_name
-  user_data   = "data/data_docker.sh"
-    depends_on = [
+  key_name   = module.aws_key_pair.key_name
+  depends_on = [
     module.new-vpc
   ]
+   
 }
 
 module "ec2_gitlab" {
   source     = "./modules/ec2_gitlab"
   vpc_id     = module.new-vpc.vpc_id
   subnet_ids = module.new-vpc.subnet_ids
-  key_name   = module.ssh-key.key_name
-  user_data   = "./data/data_gitlab.sh"
+  key_name   = module.aws_key_pair.key_name
+ 
     depends_on = [
     module.new-vpc
   ]
@@ -59,8 +59,7 @@ module "ec2_jenkins" {
   source     = "./modules/ec2_jenkins"
   vpc_id     = module.new-vpc.vpc_id
   subnet_ids = module.new-vpc.subnet_ids
-  key_name   = module.ssh-key.key_name
-  user_data   = "data/data_jenkins.sh"
+  key_name   = module.aws_key_pair.key_name
     depends_on = [
     module.new-vpc
   ]
@@ -71,8 +70,7 @@ module "ec2_sonarquber" {
   source     = "./modules/ec2_sonarquber"
   vpc_id     = module.new-vpc.vpc_id
   subnet_ids = module.new-vpc.subnet_ids
-  key_name   = module.ssh-key.key_name
-  user_data   = "./data/data_sonarquber.sh"
+  key_name   = module.aws_key_pair.key_name
     depends_on = [
     module.new-vpc
   ]

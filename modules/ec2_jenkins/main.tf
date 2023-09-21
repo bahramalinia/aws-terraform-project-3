@@ -2,11 +2,11 @@
 resource "aws_instance" "new_ec2_jenkins" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
-  key_name =    var.key_name //"my-key-ec2" # Insira o nome da chave criada antes.
+  key_name =    "sshkey-key"//  var.key_name //"my-key-ec2" # Insira o nome da chave criada antes.
   subnet_id = var.subnet_ids[0]
-  vpc_security_group_ids = [aws_security_group.security_group_jeankins.id]
+  vpc_security_group_ids = [aws_security_group.security_group_jenkins.id]
   associate_public_ip_address = true
-
+  user_data ="../data/data_jenkins.sh"     
   tags = {
     Name = "new_ec2_jenkins"
     # Insira o nome da instância de sua preferência.
@@ -29,8 +29,8 @@ resource "aws_security_group" "security_group_jenkins" {
 
   ingress {
     description = "HTTP to EC2"
-    from_port   = 80
-    to_port     = 80
+    from_port   = 8080
+    to_port     = 8080
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
