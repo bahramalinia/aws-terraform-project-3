@@ -42,7 +42,7 @@ module "ec2_docker" {
   ]
    
 }
-
+/*
 module "ec2_gitlab" {
   source     = "./modules/ec2_gitlab"
   vpc_id     = module.new-vpc.vpc_id
@@ -53,7 +53,7 @@ module "ec2_gitlab" {
     module.new-vpc
   ]
 }
-
+*/
 
 module "ec2_jenkins" {
   source     = "./modules/ec2_jenkins"
